@@ -34,7 +34,7 @@ class Shot:
 
         # Draws the Angle Bar to the Screen
         pygame.draw.line(self.screen, 'white', (self.start_x_pos, self.start_y_pos),
-                         (self.angle_bar_x_pos, self.angle_bar_y_pos), 5)
+                         (self.angle_bar_x_pos, self.angle_bar_y_pos), 3)
 
     def calculate_shot(self):
         # Calculates the Tajactory of the Shot (Power Divided by 5 to keep it reasonable)
