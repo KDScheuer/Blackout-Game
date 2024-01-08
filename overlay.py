@@ -39,7 +39,3 @@ class Overlay:
         self.screen.blit(self.angle_surface, (150, 650))
         self.screen.blit(self.power_surface, (150, 675))
         self.screen.blit(self.star_text_surface, (1100, 50))
-
-    def win(self):
-        self.screen.blit(self.level_beat_surface, (1270 - self.level_beat_surface.get_width() // 2,
-                                                   720 - self.level_beat_surface.get_height() // 2))

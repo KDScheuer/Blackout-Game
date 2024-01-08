@@ -99,6 +99,7 @@ def block_x(level, progress):
         pygame.display.update()
         clock.tick(30)
 
+        # Checks if all buildings have been powered, If so Displays a victory message and returns to menu
         if not buildings:
             screen.blit(overlay.level_beat_surface, (635 - overlay.level_beat_surface.get_width() // 2,
                                                      360 - overlay.level_beat_surface.get_height() // 2))
