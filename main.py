@@ -1,9 +1,11 @@
 import pygame
 import os
+import time
 from button import Button
 from levels import levels
 from player import Player
 from shots import Shot
+from overlay import Overlay
 
 
 def player_progress():
@@ -76,6 +78,7 @@ def block_x(level, progress):
             if keys_pressed[pygame.K_SPACE]:
                 shot.calculate_shot()
                 shot.fired = True
+                player.shots_fired += 1
 
         if shot.fired:
             shot.move()
@@ -88,10 +91,20 @@ def block_x(level, progress):
         shot.update()
         player.update()
 
+        # Initialize Overlay
+        overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle, shot.shot_power)
+        overlay.update()
 
         # Update Screen and Limit Frame Rate
         pygame.display.update()
         clock.tick(30)
+
+        if not buildings:
+            screen.blit(overlay.level_beat_surface, (635 - overlay.level_beat_surface.get_width() // 2,
+                                                     360 - overlay.level_beat_surface.get_height() // 2))
+            pygame.display.update()
+            time.sleep(2)
+            menu(progress)
 
 
 def menu(progress):
