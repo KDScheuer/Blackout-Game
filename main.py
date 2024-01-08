@@ -3,6 +3,7 @@ import os
 from button import Button
 from levels import levels
 from player import Player
+from shots import Shot
 
 
 def player_progress():
@@ -24,8 +25,9 @@ def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
     global screen, clock, running
 
-    # Initialize Player
+    # Initialize Player and Shots
     player = Player(screen)
+    shot = Shot(screen)
 
     # Import Buildings for Level
     buildings = [rect for building, rect in levels[level]['Buildings'].items()]
@@ -42,16 +44,44 @@ def block_x(level, progress):
         for building in buildings:
             pygame.draw.rect(screen, 'gray', building)
 
+        # Gets Keys Press on Keyboard
+        keys_pressed = pygame.key.get_pressed()
+
+        # If the shot is not fired this will continue to update the shot
+        if not shot.fired:
+            if keys_pressed[pygame.K_UP] and shot.shot_power < 100:
+                shot.shot_power += 1
+                print(shot.shot_power)
+            if keys_pressed[pygame.K_DOWN] and shot.shot_power > 0:
+                shot.shot_power -= 1
+                print(shot.shot_power)
+            if keys_pressed[pygame.K_LEFT] and shot.shot_angle < 90:
+                shot.shot_angle += 1
+                print(shot.shot_angle)
+            if keys_pressed[pygame.K_RIGHT] and shot.shot_angle > 0:
+                shot.shot_angle -= 1
+                print(shot.shot_angle)
+
+            # If the Space Bar is Pressed it will Calculate the Tajactory and Pause User Input until the shot is over
+            if keys_pressed[pygame.K_SPACE]:
+                shot.calculate_shot()
+                shot.fired = True
+
+        if shot.fired:
+            shot.move()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Draw Player to Screen
+        # Draw Player and shot to Screen
+        shot.update()
         player.update()
+
 
         # Update Screen and Limit Frame Rate
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(30)
 
 
 def menu(progress):
@@ -142,7 +172,7 @@ def menu(progress):
 
         # Update Screen and Limit Frame Rate
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(30)
 
 
 def main():
