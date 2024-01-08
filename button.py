@@ -1,7 +1,7 @@
 import pygame
 
 
-class Button():
+class Button:
     def __init__(self, text, pos, font=None):
         self.x_pos = pos[0]
         self.y_pos = pos[1]
@@ -19,13 +19,13 @@ class Button():
         self.text = self.font.render(new_text, True, self.base_color)
         self.input_text = new_text
 
-    def checkForInput(self, position):
+    def check_for_input(self, position):
         if (position[0] in range(self.rect.left, self.rect.right) and
                 position[1] in range(self.rect.top, self.rect.bottom)):
             return True
         return False
 
-    def changeColor(self, position):
+    def change_color(self, position):
         if self.rect.collidepoint(position):
             # Updated this line
             self.update_text(self.input_text)
