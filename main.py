@@ -77,16 +77,12 @@ def block_x(level, progress):
         if not shot.fired:
             if keys_pressed[pygame.K_UP] and shot.shot_power < 100:
                 shot.shot_power += 1
-                print(shot.shot_power)
             if keys_pressed[pygame.K_DOWN] and shot.shot_power > 0:
                 shot.shot_power -= 1
-                print(shot.shot_power)
             if keys_pressed[pygame.K_LEFT] and shot.shot_angle < 90:
                 shot.shot_angle += 1
-                print(shot.shot_angle)
             if keys_pressed[pygame.K_RIGHT] and shot.shot_angle > 0:
                 shot.shot_angle -= 1
-                print(shot.shot_angle)
 
             # If the Space Bar is Pressed it will Calculate the Tajactory and Pause User Input until the shot is over
             if keys_pressed[pygame.K_SPACE]:
@@ -129,6 +125,8 @@ def menu(progress):
     # Load Background Image
     image = pygame.image.load('./Assets/city_skyline_menu.png')
     background = pygame.transform.scale(image, (1270, 720))
+    control_image = pygame.image.load('./Assets/controls.PNG')
+    controls = pygame.transform.scale(control_image, (315, 165))
 
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Menu')
@@ -212,6 +210,9 @@ def menu(progress):
         screen.blit(description_surface1, (350 - star_surface.get_width() // 2, 225 - title_surface.get_height() // 2))
         screen.blit(description_surface2, (300 - star_surface.get_width() // 2, 260 - title_surface.get_height() // 2))
 
+        # Display Controls
+        screen.blit(controls, (950, 550))
+
         # Update Screen and Limit Frame Rate
         pygame.display.update()
         clock.tick(30)
@@ -239,5 +240,4 @@ if __name__ == "__main__":
 # TODO Update Collision
 # TODO Have Camera follow shot
 # TODO Write To Save After Game
-# TODO Add Tutorial for Level 1
-# TODO Test Levels12
+# TODO Test Levels
