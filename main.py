@@ -31,6 +31,7 @@ def block_x(level, progress):
 
     # Import Buildings for Level
     buildings = [rect for building, rect in levels[level]['Buildings'].items()]
+    powered_buildings = []
 
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Block 1')
@@ -43,6 +44,15 @@ def block_x(level, progress):
         # Draw Buildings to Screen
         for building in buildings:
             pygame.draw.rect(screen, 'gray', building)
+            if pygame.Rect.contains(building, shot.sprite):
+                buildings.remove(building)
+                powered_buildings.append(building)
+                shot.reset()
+
+        for powered_building in powered_buildings:
+            if pygame.Rect.contains(powered_building, shot.sprite):
+                shot.reset()
+            pygame.draw.rect(screen, 'yellow', powered_building)
 
         # Gets Keys Press on Keyboard
         keys_pressed = pygame.key.get_pressed()

@@ -25,7 +25,7 @@ class Shot:
     def update(self):
         # Draws the Updated Position of the Shot
         self.sprite = pygame.Rect(self.x_pos, self.y_pos, 15, 15)
-        pygame.draw.rect(self.screen, 'yellow', self.sprite)
+        pygame.draw.rect(self.screen, 'orange', self.sprite)
 
         # Calculates were the Angle Bar needs to be Placed to Assist the Player
         angle_radians = math.radians(self.shot_angle)
@@ -59,4 +59,3 @@ class Shot:
         self.x_pos = self.start_x_pos
         self.y_pos = self.start_y_pos
         self.shot_power = 0
-        self.shot_angle = 0
