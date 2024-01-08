@@ -17,15 +17,18 @@ class Shot:
         self.vel_y = 0
         self.gravity = 0.1
         self.screen = screen
-        self.sprite = pygame.Rect(self.x_pos, self.y_pos, 15, 15)
+        self.sprite = pygame.Rect(self.x_pos, self.y_pos, 20, 20)
         self.angle_bar_length = 100
         self.angle_bar_x_pos = 0
         self.angle_bar_y_pos = 0
+        image = pygame.image.load('./Assets/power.png')
+        self.image = pygame.transform.scale(image, (20, 20))
 
     def update(self):
         # Draws the Updated Position of the Shot
         self.sprite = pygame.Rect(self.x_pos, self.y_pos, 15, 15)
         pygame.draw.rect(self.screen, 'orange', self.sprite)
+        self.screen.blit(self.image, (self.x_pos, self.y_pos))
 
         # Calculates were the Angle Bar needs to be Placed to Assist the Player
         angle_radians = math.radians(self.shot_angle)
@@ -33,7 +36,7 @@ class Shot:
         self.angle_bar_y_pos = self.start_y_pos - self.angle_bar_length * math.sin(angle_radians)
 
         # Draws the Angle Bar to the Screen
-        pygame.draw.line(self.screen, 'white', (self.start_x_pos, self.start_y_pos),
+        pygame.draw.line(self.screen, 'yellow', (self.start_x_pos, self.start_y_pos),
                          (self.angle_bar_x_pos, self.angle_bar_y_pos), 3)
 
     def calculate_shot(self):

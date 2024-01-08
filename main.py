@@ -27,6 +27,14 @@ def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
     global screen, clock, running
 
+    # Load Background Image
+    image = pygame.image.load('./Assets/city_skyline.png')
+    background = pygame.transform.scale(image, (1270, 720))
+
+    # Load Building Image
+    building_image = pygame.image.load('./Assets/building.png')
+    building_image2 = pygame.image.load('./Assets/building2.png')
+
     # Initialize Player and Shots
     player = Player(screen)
     shot = Shot(screen)
@@ -42,10 +50,13 @@ def block_x(level, progress):
     while running:
         # Display Background Color
         screen.fill('black')
+        screen.blit(background, (0, 0))
 
         # Draw Buildings to Screen
         for building in buildings:
             pygame.draw.rect(screen, 'gray', building)
+            building_image = pygame.transform.scale(building_image, (building.width, building.height))
+            screen.blit(building_image, building.topleft)
             if pygame.Rect.contains(building, shot.sprite):
                 buildings.remove(building)
                 powered_buildings.append(building)
@@ -55,6 +66,9 @@ def block_x(level, progress):
             if pygame.Rect.contains(powered_building, shot.sprite):
                 shot.reset()
             pygame.draw.rect(screen, 'yellow', powered_building)
+            building_image2 = pygame.transform.scale(building_image2,
+                                                    (powered_building.width, powered_building.height))
+            screen.blit(building_image2, powered_building.topleft)
 
         # Gets Keys Press on Keyboard
         keys_pressed = pygame.key.get_pressed()
@@ -112,6 +126,10 @@ def menu(progress):
     # Get Global Variables to Establish Menu Game Loop
     global screen, clock, running
 
+    # Load Background Image
+    image = pygame.image.load('./Assets/city_skyline_menu.png')
+    background = pygame.transform.scale(image, (1270, 720))
+
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Menu')
 
@@ -120,7 +138,7 @@ def menu(progress):
     button_font = pygame.font.Font(None, 50)
     title = "BLACKOUT"
     title_color = (255, 255, 0)
-    star_desc_color = (100, 100, 50)
+    star_desc_color = (200, 200, 25)
     title_surface = title_font.render(title, True, title_color)
 
     # Getting Total Stars that the Player has earned
@@ -145,7 +163,7 @@ def menu(progress):
     while running:
         # Display Background Color
         screen.fill('black')
-
+        screen.blit(background, (0, 0))
         # Getting Mouse Position
         mouse_pos = pygame.mouse.get_pos()
 
@@ -217,3 +235,9 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     running = True
     main()
+
+# TODO Update Collision
+# TODO Have Camera follow shot
+# TODO Write To Save After Game
+# TODO Add Tutorial for Level 1
+# TODO Test Levels12
