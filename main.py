@@ -114,6 +114,15 @@ def block_x(level, progress):
             screen.blit(overlay.level_beat_surface, (635 - overlay.level_beat_surface.get_width() // 2,
                                                      360 - overlay.level_beat_surface.get_height() // 2))
             pygame.display.update()
+            if player.shots_fired <= levels[level]['Stars']['3 Star']:
+                progress[level] = 3
+            elif player.shots_fired <= levels[level]['Stars']['2 Star']:
+                progress[level] = 2
+            else:
+                progress[level] = 1
+            with open('Blackout_Save_Data.txt', 'w') as f:
+                for key, value in progress.items():
+                    f.write(str(key) + ',' + str(value) + '\n')
             time.sleep(2)
             menu(progress)
 
@@ -151,10 +160,10 @@ def menu(progress):
     star_surface = star_font.render(stars, True, star_desc_color)
 
     # Initializing Game Description
-    description1 = '''After a city wide black-out, the city needs you to reconnect the'''
+    description1 = '''Following a City Wide Black-Out,'''
     description_font1 = pygame.font.Font(None, 40)
     description_surface1 = description_font1.render(description1, True, star_desc_color)
-    description2 = '''buildings and restore power reconnect the buildings and restore power'''
+    description2 = ''' We Need you to reconnect the Buildings and Restore Power'''
     description_surface2 = description_font1.render(description2, True, star_desc_color)
 
     # Menu Game Loop
@@ -207,8 +216,8 @@ def menu(progress):
         # Writing Title, Stars, and Description to Screen
         screen.blit(title_surface, (635 - title_surface.get_width() // 2, 50 - title_surface.get_height() // 2))
         screen.blit(star_surface, (635 - star_surface.get_width() // 2, 150 - title_surface.get_height() // 2))
-        screen.blit(description_surface1, (350 - star_surface.get_width() // 2, 225 - title_surface.get_height() // 2))
-        screen.blit(description_surface2, (300 - star_surface.get_width() // 2, 260 - title_surface.get_height() // 2))
+        screen.blit(description_surface1, (550 - star_surface.get_width() // 2, 225 - title_surface.get_height() // 2))
+        screen.blit(description_surface2, (350 - star_surface.get_width() // 2, 260 - title_surface.get_height() // 2))
 
         # Display Controls
         screen.blit(controls, (950, 550))
@@ -236,8 +245,3 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     running = True
     main()
-
-# TODO Update Collision
-# TODO Have Camera follow shot
-# TODO Write To Save After Game
-# TODO Test Levels
