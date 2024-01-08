@@ -1,6 +1,7 @@
 import pygame
 import os
 from button import Button
+from levels import levels
 
 
 def player_progress():
@@ -18,9 +19,12 @@ def player_progress():
     return progress
 
 
-def block1(progress):
+def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
     global screen, clock, running
+
+    # Import Buildings for Level
+    buildings = [rect for building, rect in levels[level].items()]
 
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Block 1')
@@ -28,7 +32,11 @@ def block1(progress):
     # Block 1 Game Loop
     while running:
         # Display Background Color
-        screen.fill('blue')
+        screen.fill('black')
+
+        # Draw Buildings to Screen
+        for building in buildings:
+            pygame.draw.rect(screen, 'gray', building)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -100,16 +108,23 @@ def menu(progress):
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if quit_button.checkForInput(mouse_pos):
+                if quit_button.check_for_input(mouse_pos):
                     running = False
                     return
-                if block1_button.checkForInput(mouse_pos):
-                    block1(progress)
-                    return
+                if block1_button.check_for_input(mouse_pos):
+                    block_x('Block 1', progress)
+                if block2_button.check_for_input(mouse_pos):
+                    block_x('Block 2', progress)
+                if block3_button.check_for_input(mouse_pos):
+                    block_x('Block 3', progress)
+                if block4_button.check_for_input(mouse_pos):
+                    block_x('Block 4', progress)
+                if block5_button.check_for_input(mouse_pos):
+                    block_x('Block 5', progress)
 
         # Writing Buttons to Screen
         for button in [block1_button, block2_button, block3_button, block4_button, block5_button, quit_button]:
-            button.changeColor(mouse_pos)
+            button.change_color(mouse_pos)
             button.update(screen)
 
         # Writing Title, Stars, and Description to Screen
@@ -124,13 +139,6 @@ def menu(progress):
 
 
 def main():
-    # Pygame Initialization
-    global screen, clock, running
-    pygame.init()
-    screen = pygame.display.set_mode((1270, 720))
-    clock = pygame.time.Clock()
-    running = True
-
     # Load Player Data or Create Save File
     progress = player_progress()
 
@@ -142,4 +150,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # Pygame Initialization
+    pygame.init()
+    screen = pygame.display.set_mode((1270, 720))
+    clock = pygame.time.Clock()
+    running = True
     main()
