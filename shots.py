@@ -15,7 +15,7 @@ class Shot:
         self.fired = False
         self.vel_x = 0
         self.vel_y = 0
-        self.gravity = 0.1
+        self.gravity = 0.2
         self.screen = screen
         self.sprite = pygame.Rect(self.x_pos, self.y_pos, 20, 20)
         self.angle_bar_length = 100
@@ -41,7 +41,7 @@ class Shot:
 
     def calculate_shot(self):
         # Calculates the Tajactory of the Shot (Power Divided by 5 to keep it reasonable)
-        self.current_power = self.shot_power / 5
+        self.current_power = self.shot_power / 4
         self.current_angle = math.radians(self.shot_angle)
         self.vel_x = self.current_power * math.cos(self.current_angle)
         self.vel_y = -self.current_power * math.sin(self.current_angle)
