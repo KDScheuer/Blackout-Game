@@ -2,6 +2,7 @@ import pygame
 import os
 from button import Button
 from levels import levels
+from player import Player
 
 
 def player_progress():
@@ -23,8 +24,11 @@ def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
     global screen, clock, running
 
+    # Initialize Player
+    player = Player(screen)
+
     # Import Buildings for Level
-    buildings = [rect for building, rect in levels[level].items()]
+    buildings = [rect for building, rect in levels[level]['Buildings'].items()]
 
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Block 1')
@@ -41,6 +45,9 @@ def block_x(level, progress):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        # Draw Player to Screen
+        player.update()
 
         # Update Screen and Limit Frame Rate
         pygame.display.update()
