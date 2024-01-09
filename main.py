@@ -128,6 +128,8 @@ def block_x(level, progress):
             # If the Space Bar is Pressed it will Calculate the Tajactory and Pause User Input until the shot is over
             if keys_pressed[pygame.K_SPACE]:
                 shot.calculate_shot()
+                pygame.mixer.music.load('./Assets/laser-shot.wav')
+                pygame.mixer.music.play()
                 shot.fired = True
                 player.shots_fired += 1
 
@@ -231,18 +233,25 @@ def menu(progress):
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.mixer.music.load('./Assets/click.wav')
                 if quit_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     running = False
                     return
                 if block1_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     block_x('Block 1', progress)
                 if block2_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     block_x('Block 2', progress)
                 if block3_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     block_x('Block 3', progress)
                 if block4_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     block_x('Block 4', progress)
                 if block5_button.check_for_input(mouse_pos):
+                    pygame.mixer.music.play()
                     block_x('Block 5', progress)
 
         # Writing Buttons to Screen
