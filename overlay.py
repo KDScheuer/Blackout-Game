@@ -5,11 +5,11 @@ class Overlay:
     def __init__(self, screen, shots, level, level_details, angle, power, image):
         self.total_shots_font = pygame.font.Font(None, 30)
         self.total_shots = 'Shots Taken: ' + str(shots)
-        self.total_shots_surface = self.total_shots_font.render(self.total_shots, True, 'yellow')
+        self.total_shots_surface = self.total_shots_font.render(self.total_shots, True, 'white')
 
         self.wind_font = pygame.font.Font(None, 30)
         self.wind = 'Wind: ' + str(level_details['Wind'])
-        self.wind_surface = self.wind_font.render(self.wind, True, 'yellow')
+        self.wind_surface = self.wind_font.render(self.wind, True, 'white')
 
         self.level_font = pygame.font.Font(None, 60)
         self.level = level
