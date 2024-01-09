@@ -65,4 +65,3 @@ class Shot:
         self.fired = False
         self.x_pos = self.start_x_pos
         self.y_pos = self.start_y_pos
-        self.shot_power = 50

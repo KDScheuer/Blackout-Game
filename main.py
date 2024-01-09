@@ -57,7 +57,7 @@ def power_animation(building_hit, buildings, powered_buildings, overlay, player,
         overlay.update()
         pygame.display.update()
         clock.tick(30)
-
+        time.sleep(.1)
 
 def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
