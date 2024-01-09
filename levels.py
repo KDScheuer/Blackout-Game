@@ -11,7 +11,7 @@ levels = {
             '2 Star': 3,
             '1 Star': 4
         },
-        'Wind': 0
+        'Wind': .5
     },
 
     'Block 2': {
@@ -25,7 +25,7 @@ levels = {
             '2 Star': 4,
             '1 Star': 5
         },
-        'Wind': 0
+        'Wind': .5
     },
 
     'Block 3': {
@@ -38,7 +38,7 @@ levels = {
             '2 Star': 3,
             '1 Star': 4
         },
-        'Wind': 0
+        'Wind': -.5
     },
 
     'Block 4': {
@@ -53,7 +53,7 @@ levels = {
             '2 Star': 5,
             '1 Star': 6
         },
-        'Wind': 0
+        'Wind': -.5
     },
 
     'Block 5': {
@@ -71,6 +71,6 @@ levels = {
             '2 Star': 8,
             '1 Star': 9
         },
-        'Wind': 0
+        'Wind': -.5
     },
 }

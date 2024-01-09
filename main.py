@@ -1,11 +1,14 @@
 import pygame
 import os
 import time
+import random
 from button import Button
 from levels import levels
 from player import Player
 from shots import Shot
 from overlay import Overlay
+from wind_effect import WindEffect
+
 
 
 def player_progress():
@@ -80,11 +83,29 @@ def block_x(level, progress):
     # Set Menu Caption on Window
     pygame.display.set_caption('BLACKOUT / Block 1')
 
+    # Sets Wind Effect for the Level
+    shot.wind = levels[level]['Wind']
+
+    # Creates Object to Display Wind Speed Moving Across Screen
+    clouds_start = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7']
+    clouds = []
+    for cloud in clouds_start:
+        cloud = WindEffect(screen)
+        cloud.speed = levels[level]['Wind']
+        cloud.x_pos = random.randint(0, 1270)
+        cloud.y_pos = random.randint(a=0, b=250)
+        clouds.append(cloud)
+
+
     # Block 1 Game Loop
     while running:
         # Display Background Color
         screen.fill('black')
         screen.blit(background, (0, 0))
+
+        # Moves Wind
+        for cloud in clouds:
+            cloud.update()
 
         # Initialize Overlay
         overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle, shot.shot_power)

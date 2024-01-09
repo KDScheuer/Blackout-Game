@@ -16,6 +16,7 @@ class Shot:
         self.vel_x = 0
         self.vel_y = 0
         self.gravity = 0.3
+        self.wind = 0
         self.screen = screen
         self.sprite = pygame.Rect(self.x_pos, self.y_pos, 20, 20)
         self.angle_bar_length = 100
@@ -51,6 +52,9 @@ class Shot:
         self.x_pos += self.vel_x
         self.y_pos += self.vel_y
         self.vel_y += self.gravity
+        # Sets Wind Effect the Multiplier is used to fine tune the effect on the shot
+        wind_effect = self.wind * 0.1
+        self.vel_x += wind_effect
         self.sprite.topleft = (int(self.x_pos), int(self.y_pos))
 
         # Resets the Shot if it Leaves the Screen on the Bottom or the Right
