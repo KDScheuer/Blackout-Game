@@ -23,6 +23,40 @@ def player_progress():
     return progress
 
 
+def power_animation(building_hit, buildings, powered_buildings, overlay, player, image1, image2, clock, shot):
+    # Plays Sounds Effect When Building is Hit
+    pygame.mixer.music.load('./Assets/shockwave.wav')
+    pygame.mixer.music.play()
+
+    # Controls How Many Times the Building Hit Will Flash
+    for i in range(4):
+
+        # Draws UnPowered Buildings to Screen
+        for building in buildings:
+            building_image = pygame.transform.scale(image1, (building.width, building.height))
+            screen.blit(building_image, building.topleft)
+
+        # Draws Powered Buildings to Screen
+        for building in powered_buildings:
+            building_image = pygame.transform.scale(image2, (building.width, building.height))
+            screen.blit(building_image, building.topleft)
+
+        # If Even Building Hit is On else it is Off (This is What Makes the Hit Building Flash)
+        if i % 2 == 0:
+            building_image2 = pygame.transform.scale(image2, (building_hit.width, building_hit.height))
+            screen.blit(building_image2, building_hit.topleft)
+        else:
+            building_image = pygame.transform.scale(image1, (building_hit.width, building_hit.height))
+            screen.blit(building_image, building_hit.topleft)
+
+        # Draws the other elements onto the screen, so they don't disappear to the player
+        shot.update()
+        player.update()
+        overlay.update()
+        pygame.display.update()
+        clock.tick(30)
+
+
 def block_x(level, progress):
     # Get Global Variables to Establish Block 1 Game Loop
     global screen, clock, running
@@ -52,13 +86,20 @@ def block_x(level, progress):
         screen.fill('black')
         screen.blit(background, (0, 0))
 
+        # Initialize Overlay
+        overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle, shot.shot_power)
+        overlay.update()
+
         # Draw Buildings to Screen
         for building in buildings:
             pygame.draw.rect(screen, 'gray', building)
             building_image = pygame.transform.scale(building_image, (building.width, building.height))
             screen.blit(building_image, building.topleft)
             if pygame.Rect.contains(building, shot.sprite):
+                # Keeps Track of What Buildings are Powered
                 buildings.remove(building)
+                power_animation(building, buildings, powered_buildings, overlay ,player, building_image,
+                                building_image2, clock, shot)
                 powered_buildings.append(building)
                 shot.reset()
 
@@ -100,10 +141,6 @@ def block_x(level, progress):
         # Draw Player and shot to Screen
         shot.update()
         player.update()
-
-        # Initialize Overlay
-        overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle, shot.shot_power)
-        overlay.update()
 
         # Update Screen and Limit Frame Rate
         pygame.display.update()

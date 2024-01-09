@@ -9,13 +9,13 @@ class Shot:
         self.x_pos = 65
         self.y_pos = 690
         self.current_power = 0
-        self.shot_power = 0
+        self.shot_power = 50
         self.current_angle = 0
         self.shot_angle = 45
         self.fired = False
         self.vel_x = 0
         self.vel_y = 0
-        self.gravity = 0.2
+        self.gravity = 0.3
         self.screen = screen
         self.sprite = pygame.Rect(self.x_pos, self.y_pos, 20, 20)
         self.angle_bar_length = 100
@@ -61,4 +61,4 @@ class Shot:
         self.fired = False
         self.x_pos = self.start_x_pos
         self.y_pos = self.start_y_pos
-        self.shot_power = 0
+        self.shot_power = 50
