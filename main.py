@@ -10,7 +10,6 @@ from overlay import Overlay
 from wind_effect import WindEffect
 
 
-
 def player_progress():
     progress = {}
     if os.path.exists('Blackout_Save_Data.txt'):
@@ -72,6 +71,10 @@ def block_x(level, progress):
     building_image = pygame.image.load('./Assets/building.png')
     building_image2 = pygame.image.load('./Assets/building2.png')
 
+    # Load Star Image
+    star_image_raw = pygame.image.load('./Assets/star.png')
+    star_image = pygame.transform.scale(star_image_raw, (95, 105))
+
     # Initialize Player and Shots
     player = Player(screen)
     shot = Shot(screen)
@@ -96,7 +99,6 @@ def block_x(level, progress):
         cloud.y_pos = random.randint(a=0, b=250)
         clouds.append(cloud)
 
-
     # Block 1 Game Loop
     while running:
         # Display Background Color
@@ -108,7 +110,8 @@ def block_x(level, progress):
             cloud.update()
 
         # Initialize Overlay
-        overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle, shot.shot_power)
+        overlay = Overlay(screen, player.shots_fired, level, levels[level], shot.shot_angle,
+                          shot.shot_power, star_image)
         overlay.update()
 
         # Draw Buildings to Screen

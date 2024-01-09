@@ -14,7 +14,6 @@ class WindEffect:
         self.effect_rect = pygame.Rect((self.x_pos, self.y_pos), (100, 10))
 
     def update(self):
-        print(self.x_pos)
         if self.x_pos > 1270 and self.speed > 0:
             self.x_pos = -110
         elif self.x_pos < -120 and self.speed < 0:
