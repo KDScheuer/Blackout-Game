@@ -3,57 +3,63 @@ import pygame
 levels = {
     'Block 1': {
         'Buildings': {
-            'building_1': pygame.Rect(1060, 220, 100, 500),
-            'building_2': pygame.Rect(810, 470, 100, 250)
+            'building_1': pygame.Rect(1100, 220, 100, 500),
+            'building_2': pygame.Rect(950, 320, 100, 400),
+            'building_3': pygame.Rect(700, 370, 100, 350),
+            'building_4': pygame.Rect(550, 345, 100, 375),
         },
         'Stars': {
-            '3 Star': 2,
-            '2 Star': 3,
-            '1 Star': 4
-        },
-        'Wind': .5
-    },
-
-    'Block 2': {
-        'Buildings': {
-            'building_1': pygame.Rect(1060, 220, 100, 500),
-            'building_2': pygame.Rect(810, 470, 100, 250),
-            'building_3': pygame.Rect(610, 470, 100, 250)
-        },
-        'Stars': {
-            '3 Star': 3,
-            '2 Star': 4,
-            '1 Star': 5
-        },
-        'Wind': .5
-    },
-
-    'Block 3': {
-        'Buildings': {
-            'building_1': pygame.Rect(1060, 470, 100, 250),
-            'building_2': pygame.Rect(810, 220, 100, 500)
-        },
-        'Stars': {
-            '3 Star': 2,
-            '2 Star': 3,
-            '1 Star': 4
+            '3 Star': 4,
+            '2 Star': 6,
+            '1 Star': 7
         },
         'Wind': -.5
     },
 
-    'Block 4': {
+    'Block 2': {
         'Buildings': {
-            'building_1': pygame.Rect(600, 220, 150, 500),
-            'building_2': pygame.Rect(820, 600, 100, 120),
-            'building_3': pygame.Rect(940, 600, 100, 120),
-            'building_4': pygame.Rect(1060, 320, 150, 400)
+            'building_1': pygame.Rect(1100, 220, 100, 500),
+            'building_2': pygame.Rect(990, 270, 100, 450),
+            'building_3': pygame.Rect(800, 245, 100, 475),
+            'building_4': pygame.Rect(600, 270, 100, 450),
         },
         'Stars': {
             '3 Star': 4,
             '2 Star': 5,
             '1 Star': 6
         },
-        'Wind': -.5
+        'Wind': .3
+    },
+
+    'Block 3': {
+        'Buildings': {
+            'building_1': pygame.Rect(1100, 320, 100, 400),
+            'building_2': pygame.Rect(990, 320, 100, 400),
+            'building_3': pygame.Rect(880, 320, 100, 400),
+            'building_4': pygame.Rect(650, 420, 100, 300),
+            'building_5': pygame.Rect(540, 420, 100, 300),
+        },
+        'Stars': {
+            '3 Star': 5,
+            '2 Star': 7,
+            '1 Star': 8
+        },
+        'Wind': 1
+    },
+
+    'Block 4': {
+        'Buildings': {
+            'building_1': pygame.Rect(1100, 320, 100, 400),
+            'building_2': pygame.Rect(900, 370, 100, 350),
+            'building_3': pygame.Rect(790, 345, 100, 375),
+            'building_4': pygame.Rect(575, 270, 100, 450)
+        },
+        'Stars': {
+            '3 Star': 4,
+            '2 Star': 5,
+            '1 Star': 6
+        },
+        'Wind': -.7
     },
 
     'Block 5': {
@@ -71,6 +77,6 @@ levels = {
             '2 Star': 8,
             '1 Star': 9
         },
-        'Wind': -.5
+        'Wind': -.3
     },
 }
